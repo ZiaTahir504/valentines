@@ -3,65 +3,69 @@ import './App.css';
 
 const App = () => {
 
-  const randomNumber = () => Math.floor(Math.random() * 15) + 5;
-
   const earClick = () => {
-    let numberOfLines = randomNumber();
-    fetch(`https://poetrydb.org/title,linecount/ear;${numberOfLines}/lines.json`, { mode: 'cors' })
+    // 17 - 22 are 14 lines long <3
+    let n = Math.floor(Math.random() * (22 - 17 + 1)) + 17;
+    fetch(`https://poetrydb.org/title/hear/lines.json`, { mode: 'cors' })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        let msg = new SpeechSynthesisUtterance();
+        msg.text = data[n].lines.toString().replace(/[^\w.']+/g, " ");
+        window.speechSynthesis.speak(msg);
+      })
       .catch((err) => console.error(err.message));
   };
 
   const eyeClick = async () => {
-    let numberOfLines = randomNumber();
-    fetch(`https://poetrydb.org/title,linecount/eye;${numberOfLines}/lines.json`, { mode: 'cors' })
+    // 10 - 15 are 14 lines long <3
+    let n = Math.floor(Math.random() * (15 - 10 + 1) + 10)
+    fetch(`https://poetrydb.org/title/see/lines.json`, { mode: 'cors' })
       .then((res) => res.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.error(err.message));
-  };
-
-  const noseClick = async () => {
-    let numberOfLines = randomNumber();
-    fetch(`https://poetrydb.org/title,linecount/nose;${numberOfLines}/lines.json`, { mode: 'cors' })
-      .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        let msg = new SpeechSynthesisUtterance();
+        msg.text = data[n].lines.toString().replace(/[^\w.']+/g, " ");
+        window.speechSynthesis.speak(msg);
+      })
       .catch((err) => console.error(err.message));
   };
   
   const mouthClick = async () => {
-    let numberOfLines = randomNumber();
-    fetch(`https://poetrydb.org/title,linecount/mouth;${numberOfLines}/lines.json`, { mode: 'cors' })
+    // only 0 is 14 lines long :( </3
+    fetch(`https://poetrydb.org/title/speak/lines.json`, { mode: 'cors' })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        let msg = new SpeechSynthesisUtterance();
+        msg.text = data[0].lines.toString().replace(/[^\w.']+/g, " ");
+        window.speechSynthesis.speak(msg);
+      })
       .catch((err) => console.error(err.message));
   };
 
   return (
     <Fragment>
-        <div class="head">
-          <div class="top-fur"></div>
-          <div class="ears">
-            <div class="ear-left" onClick={earClick}></div>
-            <div class="ear-right" onClick={earClick}></div>
+        <div className="head">
+          <div className="top-fur"></div>
+          <div className="ears">
+            <div className="ear-left" onClick={earClick}></div>
+            <div className="ear-right" onClick={earClick}></div>
           </div>
-          <div class="brows">
-            <div class="brow"></div>
-            <div class="brow"></div>
+          <div className="brows">
+            <div className="brow"></div>
+            <div className="brow"></div>
           </div>
-          <div class="eyes">
-            <div class="eye" onClick={eyeClick}></div>
-            <div class="eye" onClick={eyeClick}></div>
+          <div className="eyes">
+            <div className="eye" onClick={eyeClick}></div>
+            <div className="eye" onClick={eyeClick}></div>
           </div>
-          <div class="snout"></div>
-          <div class="nose" onClick={noseClick}></div>
-          <div class="mouth" onClick={mouthClick}>
-            <div class="teeth"></div>
-            <div class="teeth"></div>
+          <div className="snout"></div>
+          <div className="nose"></div>
+          <div className="mouth" onClick={mouthClick}>
+            <div className="teeth"></div>
+            <div className="teeth"></div>
           </div>
-          <div class="cheeks">
-            <div class="cheek"></div>
-            <div class="cheek"></div>
+          <div className="cheeks">
+            <div className="cheek"></div>
+            <div className="cheek"></div>
           </div>
         </div>
     </Fragment>
