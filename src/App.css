@@ -165,7 +165,7 @@ body {
     border-right: 8px solid transparent;
     border-top: 16px solid white;
     margin: 15px;
-    margin-bottom: 37.1px;
+    margin-bottom: 39px;
 }
 
 .cheeks {
@@ -202,4 +202,3 @@ body {
 .cheek::after {
     transform: rotate(60deg);
 }
-
